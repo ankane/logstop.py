@@ -1,4 +1,5 @@
 import logging
+from logging import LogRecord
 import re
 
 __all__ = ['LogstopFilter']
@@ -16,10 +17,10 @@ URL_PASSWORD_REGEX = r'((?:\/\/|%2F%2F)\S+(?::|%3A))\S+(@|%40)'
 
 
 class LogstopFilter(logging.Filter):
-    def __init__(self, ip=False):
+    def __init__(self, ip: bool = False) -> None:
         self._ip = ip
 
-    def filter(self, record):
+    def filter(self, record: LogRecord) -> bool:
         # same logic as getMessage
         msg = str(record.msg)
         if record.args:

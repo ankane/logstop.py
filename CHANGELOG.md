@@ -1,3 +1,7 @@
+## 0.1.2 (unreleased)
+
+- Added type hints
+
 ## 0.1.1 (2021-08-16)
 
 - Added support for interpolation
