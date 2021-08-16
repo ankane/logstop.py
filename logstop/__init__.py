@@ -1,6 +1,8 @@
 import logging
 import re
 
+__all__ = ['LogstopFilter']
+
 FILTERED_STR = '**********'
 FILTERED_URL_STR = r'\1**********\2'
 
