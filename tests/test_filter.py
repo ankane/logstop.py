@@ -57,7 +57,7 @@ class TestFilter(object):
         with caplog.at_level(logging.INFO):
             caplog.clear()
             logger.info(None)
-            assert 'None' == unquote_plus(caplog.records[-1].msg)
+            assert 'None' == caplog.records[-1].msg
 
     def assert_filtered(self, msg, expected='**********', **kwargs):
         logger = self.get_logger(**kwargs)
