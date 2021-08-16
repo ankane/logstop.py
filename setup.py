@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='logstop',
-    version='0.1.0',
+    version='0.1.1',
     description='Keep personal data out of your logs',
     url='https://github.com/ankane/logstop.py',
     author='Andrew Kane',
