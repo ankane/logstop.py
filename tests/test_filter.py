@@ -54,27 +54,24 @@ class TestFilter(object):
         logger = self.get_logger()
         caplog = self._caplog
 
-        with caplog.at_level(logging.INFO):
-            caplog.clear()
-            logger.info(None)
-            assert 'None' == caplog.records[-1].msg
+        logger.info(None)
+        assert 'None' == caplog.records[-1].msg
 
     def assert_filtered(self, msg, expected='**********', **kwargs):
         logger = self.get_logger(**kwargs)
         caplog = self._caplog
 
-        with caplog.at_level(logging.INFO):
-            caplog.clear()
-            logger.info(f'begin {msg} end')
-            assert f'begin {expected} end' == caplog.records[-1].getMessage()
+        caplog.clear()
+        logger.info(f'begin {msg} end')
+        assert f'begin {expected} end' == caplog.records[-1].getMessage()
 
-            caplog.clear()
-            logger.info(f'begin {quote_plus(msg)} end')
-            assert f'begin {expected} end' == unquote_plus(caplog.records[-1].getMessage())
+        caplog.clear()
+        logger.info(f'begin {quote_plus(msg)} end')
+        assert f'begin {expected} end' == unquote_plus(caplog.records[-1].getMessage())
 
-            caplog.clear()
-            logger.info(f'begin %s end', msg)
-            assert f'begin {expected} end' == caplog.records[-1].getMessage()
+        caplog.clear()
+        logger.info(f'begin %s end', msg)
+        assert f'begin {expected} end' == caplog.records[-1].getMessage()
 
     def refute_filtered(self, msg):
         self.assert_filtered(msg, expected=msg)
@@ -87,4 +84,5 @@ class TestFilter(object):
 
     @pytest.fixture(autouse=True)
     def inject_fixtures(self, caplog):
+        caplog.set_level(logging.INFO)
         self._caplog = caplog
