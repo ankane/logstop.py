@@ -50,11 +50,17 @@ class TestFilter(object):
         self.assert_filtered('123-45-6789@example.org')
         self.assert_filtered('127.0.0.1@example.org', ip=True)
 
-    def assert_filtered(self, msg, expected='**********', **kwargs):
-        logger = logging.getLogger(__name__)
-        logger.filters.clear()
-        logger.addFilter(LogstopFilter(**kwargs))
+    def test_object(self):
+        logger = self.get_logger()
+        caplog = self._caplog
 
+        with caplog.at_level(logging.INFO):
+            caplog.clear()
+            logger.info(None)
+            assert 'None' == unquote_plus(caplog.records[-1].msg)
+
+    def assert_filtered(self, msg, expected='**********', **kwargs):
+        logger = self.get_logger(**kwargs)
         caplog = self._caplog
 
         with caplog.at_level(logging.INFO):
@@ -68,6 +74,12 @@ class TestFilter(object):
 
     def refute_filtered(self, msg):
         self.assert_filtered(msg, expected=msg)
+
+    def get_logger(self, **kwargs):
+        logger = logging.getLogger(__name__)
+        logger.filters.clear()
+        logger.addFilter(LogstopFilter(**kwargs))
+        return logger
 
     @pytest.fixture(autouse=True)
     def inject_fixtures(self, caplog):
