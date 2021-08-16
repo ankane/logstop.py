@@ -45,15 +45,6 @@ LogstopFilter(ip=True)
 
 ## Notes
 
-Interpolation is not yet supported
-
-```python
-logger.info('Hi %s!', 'test@example.com')
-# Hi test@example.com!
-```
-
-Also:
-
 - To scrub existing log files, check out [scrubadub](https://github.com/datascopeanalytics/scrubadub)
 - To scan for unencrypted personal data in your database, check out [pdscan](https://github.com/ankane/pdscan)
 
