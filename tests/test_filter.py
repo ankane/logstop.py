@@ -66,11 +66,16 @@ class TestFilter(object):
         with caplog.at_level(logging.INFO):
             caplog.clear()
             logger.info(f'begin {msg} end')
-            assert f'begin {expected} end' == caplog.records[-1].msg
+            assert f'begin {expected} end' == caplog.records[-1].getMessage()
 
             caplog.clear()
             logger.info(f'begin {quote_plus(msg)} end')
-            assert f'begin {expected} end' == unquote_plus(caplog.records[-1].msg)
+            assert f'begin {expected} end' == unquote_plus(caplog.records[-1].getMessage())
+
+            # interpolation is not yet supported
+            caplog.clear()
+            logger.info(f'begin %s end', msg)
+            assert f'begin {msg} end' == caplog.records[-1].getMessage()
 
     def refute_filtered(self, msg):
         self.assert_filtered(msg, expected=msg)
