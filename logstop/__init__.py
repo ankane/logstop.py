@@ -18,7 +18,7 @@ class LogstopFilter(logging.Filter):
         self._ip = ip
 
     def filter(self, record):
-        msg = record.msg
+        msg = str(record.msg)
 
         # order filters are applied is important
         msg = re.sub(URL_PASSWORD_REGEX, FILTERED_URL_STR, msg)
