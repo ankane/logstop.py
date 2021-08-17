@@ -4,7 +4,7 @@ import pytest
 from urllib.parse import quote_plus, unquote_plus
 
 
-class TestFilter(object):
+class TestFilter:
     def test_email(self):
         self.assert_filtered('test@example.org')
         self.assert_filtered('test123@example.org')
