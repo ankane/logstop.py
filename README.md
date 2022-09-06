@@ -53,11 +53,11 @@ Disable default rules with: [unreleased]
 
 ```python
 LogstopFilter(
-  email=False,
-  phone=False,
-  credit_card=False,
-  ssn=False,
-  url_password=False
+    email=False,
+    phone=False,
+    credit_card=False,
+    ssn=False,
+    url_password=False
 )
 ```
 
