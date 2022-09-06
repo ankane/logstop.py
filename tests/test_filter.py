@@ -16,12 +16,14 @@ class TestFilter:
         self.assert_filtered('test-test@example.org')
         self.assert_filtered('test@example.us')
         self.assert_filtered('test@example.science')
+        self.refute_filtered('test@example.org', email=False)
 
     def test_phone(self):
         self.assert_filtered('555-555-5555')
         self.assert_filtered('555 555 5555')
         self.assert_filtered('555.555.5555')
         self.refute_filtered('5555555555')
+        self.refute_filtered('555-555-5555', phone=False)
 
         # use 7 digit min
         # https://stackoverflow.com/questions/14894899/what-is-the-minimum-length-of-a-valid-international-phone-number
@@ -37,11 +39,13 @@ class TestFilter:
         self.assert_filtered('4242424242424242')
         self.refute_filtered('0242424242424242')
         self.refute_filtered('55555555-5555-5555-5555-555555555555')  # uuid
+        self.refute_filtered('4242-4242-4242-4242', credit_card=False)
 
     def test_ssn(self):
         self.assert_filtered('123-45-6789')
         self.assert_filtered('123 45 6789')
         self.refute_filtered('123456789')
+        self.refute_filtered('123-45-6789', ssn=False)
 
     def test_ip(self):
         self.refute_filtered('127.0.0.1')
@@ -50,6 +54,7 @@ class TestFilter:
     def test_url_password(self):
         self.assert_filtered('https://user:pass@host', expected='https://user:**********@host')
         self.assert_filtered('https://user:pass@host.com', expected='https://user:**********@host.com')
+        self.refute_filtered('https://user:pass@host', url_password=False)
 
     def test_mac(self):
         self.refute_filtered('ff:ff:ff:ff:ff:ff')
@@ -87,8 +92,8 @@ class TestFilter:
         logger.info(f'begin %s end', msg)
         assert f'begin {expected} end' == caplog.records[-1].getMessage()
 
-    def refute_filtered(self, msg):
-        self.assert_filtered(msg, expected=msg)
+    def refute_filtered(self, msg, **kwargs):
+        self.assert_filtered(msg, expected=msg, **kwargs)
 
     def get_logger(self, **kwargs):
         logger = logging.getLogger(__name__)

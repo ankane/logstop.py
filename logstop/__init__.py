@@ -19,9 +19,14 @@ MAC_REGEX = r'\b[0-9a-f]{2}(?:(?::|%3A)[0-9a-f]{2}){5}\b'
 
 
 class LogstopFilter(logging.Filter):
-    def __init__(self, ip: bool = False, mac: bool = False) -> None:
+    def __init__(self, ip: bool = False, mac: bool = False, url_password: bool = True, email: bool = True, credit_card: bool = True, phone: bool = True, ssn: bool = True) -> None:
         self._ip = ip
         self._mac = mac
+        self._url_password = url_password
+        self._email = email
+        self._credit_card = credit_card
+        self._phone = phone
+        self._ssn = ssn
 
     def filter(self, record: LogRecord) -> bool:
         # same logic as getMessage
@@ -31,13 +36,22 @@ class LogstopFilter(logging.Filter):
             record.args = ()
 
         # order filters are applied is important
-        msg = re.sub(URL_PASSWORD_REGEX, FILTERED_URL_STR, msg)
-        msg = re.sub(EMAIL_REGEX, FILTERED_STR, msg, flags=re.IGNORECASE)
-        msg = re.sub(CREDIT_CARD_REGEX, FILTERED_STR, msg)
-        msg = re.sub(CREDIT_CARD_REGEX_DELIMITERS, FILTERED_STR, msg)
-        msg = re.sub(E164_PHONE_REGEX, FILTERED_STR, msg)
-        msg = re.sub(PHONE_REGEX, FILTERED_STR, msg)
-        msg = re.sub(SSN_REGEX, FILTERED_STR, msg)
+        if self._url_password:
+            msg = re.sub(URL_PASSWORD_REGEX, FILTERED_URL_STR, msg)
+
+        if self._email:
+            msg = re.sub(EMAIL_REGEX, FILTERED_STR, msg, flags=re.IGNORECASE)
+
+        if self._credit_card:
+            msg = re.sub(CREDIT_CARD_REGEX, FILTERED_STR, msg)
+            msg = re.sub(CREDIT_CARD_REGEX_DELIMITERS, FILTERED_STR, msg)
+
+        if self._phone:
+            msg = re.sub(E164_PHONE_REGEX, FILTERED_STR, msg)
+            msg = re.sub(PHONE_REGEX, FILTERED_STR, msg)
+
+        if self._ssn:
+            msg = re.sub(SSN_REGEX, FILTERED_STR, msg)
 
         if self._ip:
             msg = re.sub(IP_REGEX, FILTERED_STR, msg)
