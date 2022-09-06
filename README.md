@@ -43,13 +43,13 @@ To scrub IP addresses (IPv4), use:
 LogstopFilter(ip=True)
 ```
 
-To scrub MAC addresses, use: [unreleased]
+To scrub MAC addresses, use:
 
 ```python
 LogstopFilter(mac=True)
 ```
 
-Disable default rules with: [unreleased]
+Disable default rules with:
 
 ```python
 LogstopFilter(
