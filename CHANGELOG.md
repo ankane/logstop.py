@@ -1,3 +1,7 @@
+## 0.1.3 (unreleased)
+
+- Added support for MAC addresses
+
 ## 0.1.2 (2021-10-17)
 
 - Added type hints

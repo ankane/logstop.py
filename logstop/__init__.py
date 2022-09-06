@@ -14,11 +14,13 @@ IP_REGEX = r'\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b'
 PHONE_REGEX = r'\b(?:\+\d{1,2}\s)?\(?\d{3}\)?[\s+.-]\d{3}[\s+.-]\d{4}\b'
 SSN_REGEX = r'\b\d{3}[\s+-]\d{2}[\s+-]\d{4}\b'
 URL_PASSWORD_REGEX = r'((?:\/\/|%2F%2F)\S+(?::|%3A))\S+(@|%40)'
+MAC_REGEX = r'\b[0-9a-f]{2}(?:(?::|%3A)[0-9a-f]{2}){5}\b'
 
 
 class LogstopFilter(logging.Filter):
-    def __init__(self, ip: bool = False) -> None:
+    def __init__(self, ip: bool = False, mac: bool = False) -> None:
         self._ip = ip
+        self._mac = mac
 
     def filter(self, record: LogRecord) -> bool:
         # same logic as getMessage
@@ -37,6 +39,9 @@ class LogstopFilter(logging.Filter):
 
         if self._ip:
             msg = re.sub(IP_REGEX, FILTERED_STR, msg)
+
+        if self._mac:
+            msg = re.sub(MAC_REGEX, FILTERED_STR, msg, flags=re.IGNORECASE)
 
         record.msg = msg
 

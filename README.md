@@ -43,6 +43,12 @@ To scrub IP addresses (IPv4), use:
 LogstopFilter(ip=True)
 ```
 
+To scrub MAC addresses, use: [unreleased]
+
+```python
+LogstopFilter(mac=True)
+```
+
 ## Notes
 
 - To scrub existing log files, check out [scrubadub](https://github.com/datascopeanalytics/scrubadub)

@@ -43,6 +43,12 @@ class TestFilter:
         self.assert_filtered('https://user:pass@host', expected='https://user:**********@host')
         self.assert_filtered('https://user:pass@host.com', expected='https://user:**********@host.com')
 
+    def test_mac(self):
+        self.refute_filtered('ff:ff:ff:ff:ff:ff')
+        self.assert_filtered('ff:ff:ff:ff:ff:ff', mac=True)
+        self.assert_filtered('a1:b2:c3:d4:e5:f6', mac=True)
+        self.assert_filtered('A1:B2:C3:D4:E5:F6', mac=True)
+
     def test_multiple(self):
         self.assert_filtered('test@example.org test2@example.org 123-45-6789', expected='********** ********** **********')
 
