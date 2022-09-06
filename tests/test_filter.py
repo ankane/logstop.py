@@ -23,6 +23,14 @@ class TestFilter:
         self.assert_filtered('555.555.5555')
         self.refute_filtered('5555555555')
 
+        # use 7 digit min
+        # https://stackoverflow.com/questions/14894899/what-is-the-minimum-length-of-a-valid-international-phone-number
+        self.refute_filtered('+123456')
+        self.assert_filtered('+1234567')
+        self.assert_filtered('+15555555555')
+        self.assert_filtered('+123456789012345')
+        self.refute_filtered('+1234567890123456')
+
     def test_credit_card(self):
         self.assert_filtered('4242-4242-4242-4242')
         self.assert_filtered('4242 4242 4242 4242')

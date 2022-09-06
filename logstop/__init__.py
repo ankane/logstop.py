@@ -12,6 +12,7 @@ CREDIT_CARD_REGEX_DELIMITERS = r'\b[3456]\d{3}[\s+-]\d{4}[\s+-]\d{4}[\s+-]\d{4}\
 EMAIL_REGEX = r'\b[\w]([\w+.-]|%2B)+(?:@|%40)[a-z\d-]+(?:\.[a-z\d-]+)*\.[a-z]+\b'
 IP_REGEX = r'\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b'
 PHONE_REGEX = r'\b(?:\+\d{1,2}\s)?\(?\d{3}\)?[\s+.-]\d{3}[\s+.-]\d{4}\b'
+E164_PHONE_REGEX = r'(?:\+|%2B)[1-9]\d{6,14}\b'
 SSN_REGEX = r'\b\d{3}[\s+-]\d{2}[\s+-]\d{4}\b'
 URL_PASSWORD_REGEX = r'((?:\/\/|%2F%2F)\S+(?::|%3A))\S+(@|%40)'
 MAC_REGEX = r'\b[0-9a-f]{2}(?:(?::|%3A)[0-9a-f]{2}){5}\b'
@@ -34,6 +35,7 @@ class LogstopFilter(logging.Filter):
         msg = re.sub(EMAIL_REGEX, FILTERED_STR, msg, flags=re.IGNORECASE)
         msg = re.sub(CREDIT_CARD_REGEX, FILTERED_STR, msg)
         msg = re.sub(CREDIT_CARD_REGEX_DELIMITERS, FILTERED_STR, msg)
+        msg = re.sub(E164_PHONE_REGEX, FILTERED_STR, msg)
         msg = re.sub(PHONE_REGEX, FILTERED_STR, msg)
         msg = re.sub(SSN_REGEX, FILTERED_STR, msg)
 
