@@ -49,6 +49,18 @@ To scrub MAC addresses, use: [unreleased]
 LogstopFilter(mac=True)
 ```
 
+Disable default rules with: [unreleased]
+
+```python
+LogstopFilter(
+  email=False,
+  phone=False,
+  credit_card=False,
+  ssn=False,
+  url_password=False
+)
+```
+
 ## Notes
 
 - To scrub existing log files, check out [scrubadub](https://github.com/datascopeanalytics/scrubadub)
