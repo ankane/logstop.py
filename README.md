@@ -68,7 +68,7 @@ LogstopFilter(
 
 ## History
 
-View the [changelog](CHANGELOG.md)
+View the [changelog](https://github.com/ankane/logstop.py/blob/master/CHANGELOG.md)
 
 ## Contributing
 
