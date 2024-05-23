@@ -17,7 +17,7 @@ By default, scrubs:
 
 Works even when data is URL-encoded with plus encoding
 
-[![Build Status](https://github.com/ankane/logstop.py/workflows/build/badge.svg?branch=master)](https://github.com/ankane/logstop.py/actions)
+[![Build Status](https://github.com/ankane/logstop.py/actions/workflows/build.yml/badge.svg)](https://github.com/ankane/logstop.py/actions)
 
 ## Installation
 
