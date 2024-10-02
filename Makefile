@@ -2,10 +2,10 @@ lint:
 	pycodestyle . --ignore=E501
 
 publish: clean
-	python3 setup.py bdist_wheel --universal
+	python3 -m build
 	ls dist
 	twine upload dist/*
 	make clean
 
 clean:
-	rm -rf .pytest_cache build dist logstop.egg-info
+	rm -rf .pytest_cache build dist src/logstop.egg-info
