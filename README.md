@@ -1,6 +1,6 @@
 # Logstop.py
 
-:fire: Keep personal data out of your logs
+🔥 Keep personal data out of your logs
 
 ```python
 logger.info('Hi test@example.org!')
