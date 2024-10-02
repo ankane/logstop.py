@@ -8,4 +8,4 @@ publish: clean
 	make clean
 
 clean:
-	rm -rf .pytest_cache build dist src/logstop.egg-info
+	rm -rf .pytest_cache build dist logstop.egg-info
