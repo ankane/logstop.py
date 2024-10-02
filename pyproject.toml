@@ -15,8 +15,3 @@ requires-python = ">= 3.9"
 
 [project.urls]
 Homepage = "https://github.com/ankane/logstop.py"
-
-[project.optional-dependencies]
-test = [
-    "pytest"
-]

@@ -84,6 +84,6 @@ To get started with development:
 ```sh
 git clone https://github.com/ankane/logstop.py.git
 cd logstop.py
-pip install -e ".[test]"
+pip install -r requirements.txt
 pytest
 ```
