@@ -1,3 +1,7 @@
+## 0.2.0 (unreleased)
+
+- Dropped support for Python < 3.9
+
 ## 0.1.3 (2022-09-06)
 
 - Added support for international phone numbers

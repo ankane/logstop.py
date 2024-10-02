@@ -16,6 +16,6 @@ setup(
     packages=[
         'logstop'
     ],
-    python_requires='>=3.6',
+    python_requires='>=3.9',
     zip_safe=False
 )
