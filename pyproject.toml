@@ -20,6 +20,3 @@ Homepage = "https://github.com/ankane/logstop.py"
 test = [
     "pytest"
 ]
-
-[tool.pytest.ini_options]
-pythonpath = "src"
