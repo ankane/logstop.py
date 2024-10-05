@@ -89,7 +89,7 @@ class TestFilter:
         assert f'begin {expected} end' == unquote_plus(caplog.records[-1].getMessage())
 
         caplog.clear()
-        logger.info(f'begin %s end', msg)
+        logger.info('begin %s end', msg)
         assert f'begin {expected} end' == caplog.records[-1].getMessage()
 
     def refute_filtered(self, msg, **kwargs):
